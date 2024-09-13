@@ -1,0 +1,17 @@
+name: Update tags
+on: [push]
+jobs:
+    update-tags:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: git fetch --all --tags
+            - name: Get project version
+              uses: thebongy/version-check@v2
+              with:
+                file: Cargo.toml
+                tagFormat: v${version}
+              id: get_project_version
+            - name: Create a new tag
+              if: ${{steps.get_project_version.outputs.versionChanged}}
+              run: echo "Version ${{steps.get_project_version.outputs.releaseVersion}}"
