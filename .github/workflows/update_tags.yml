@@ -13,12 +13,12 @@ jobs:
                 tagFormat: v${version}
               id: get_project_version
             - name: Create a new tag
-              uses: actions/github-script@v5
+              uses: actions/github-script@v6
               with:
                script: |
                 github.rest.git.createRef({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                ref: 'refs/tags/${{steps.get_project_version.outputs.releaseVersion}}',
-                sha: context.sha
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ref: 'refs/tags/${{steps.get_project_version.outputs.releaseVersion}}',
+                    sha: context.sha
                 })
