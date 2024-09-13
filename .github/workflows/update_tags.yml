@@ -13,7 +13,7 @@ jobs:
                 tagFormat: v${version}
               id: get_project_version
             - name: Create a new tag
-              uses: actions/github-script@v6
+              uses: actions/github-script@v7
               with:
                script: |
                 github.rest.git.createRef({
